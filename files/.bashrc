@@ -6,9 +6,6 @@
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
-# Homebrew stuff (for Mac OS/X) - this has to be before the aliases so that we can do things like [ `which ack` ] in there
-[ -d ~/.homebrew/bin ] && PATH=~/.homebrew/bin:$PATH
-
 # Alias definitions.
 source ~/.aliases/commands.sh
 source_directory ~/.aliases
@@ -39,43 +36,13 @@ fi
 source_directory ~/.bash_completion.d
 source_if_exists ~/.bash_prompt
 
-# Amazon EC2 stuff
-for i in ~/.ec2rc ~/Projects/kahuna/etc/ec2/ec2rc; do source_if_exists $i; done
-
-# Oracle stuff
-if [ -d /opt/oracle/instantclient_10_2 ]; then
-  LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/oracle/instantclient_10_2
-  ORACLE_HOME=/opt/oracle/instantclient_10_2
-fi
-
-# Postgres stuff (for Mac OS/X)
-HOME_BREW_POSTGRES_DIR=/opt/local/lib/postgresql84/bin/
-if [ -d $HOME_BREW_POSTGRES_DIR ]; then
-  PATH=${HOME_BREW_POSTGRES_DIR}:${PATH}
-fi
-
-# RVM Stuff
-if [[ -d ~/.rvm ]]; then
-  PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
-  source_if_exists ~/.rvm/scripts/rvm
-  rvm use default # This loads RVM into a shell session.
-fi
-
-[ `which brew` ] && source_if_exists `brew --prefix`/opt/chruby/share/chruby/chruby.sh
-
 # Haskell binaries on the path please
 [ -d ~/Library/Haskell/bin ] && PATH=$PATH:~/Library/Haskell/bin
 [ -d ~/.local/bin ] && PATH=$PATH:~/.local/bin
 
-
 # Export all the things we've set up above
-export JAVA_HOME=/opt/jdk17
 export EDITOR=vim
-export FIGNORE="CVS:.swp:.svn"
-export PATH=$PATH:~/bin:$JAVA_HOME/bin
-export LD_LIBRARY_PATH
 export LANG=en_AU.UTF-8 # Setup the LANG so that gcc doesn't spit a^ characters instead of '
-export ORACLE_HOME
 
-# Allow gistit to post gists as jamiecook
-export GISTIT_TOKEN="5522c05955ac0cbf22c8c73c26b7c51fdc4783a2"
+# Allow gistit to post gists as jasonwer
+export GISTIT_TOKEN="34d2059b940f20149bc984c0694ff9778bf2f125"
